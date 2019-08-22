@@ -13,7 +13,6 @@ Makefile
 *.make
 
 # Misc
-*.txt
 *.7z
 *.zip
 *.tar.gz
@@ -26,12 +25,18 @@ Makefile
 bin
 obj
 ipch
-Debug
-release
-Release
-Secure
+[Rr]elease
+[Dd]ebug
 .vs
 cov-int
-docker/yojimbo
-valgrind/yojimbo
+c/docker/netcode.io
+c/valgrind/netcode.io
 docs
+*.exe
+[Bb]uild
+# Ignore qt files when importing CMakeLists
+*.users
+# Ignore CLion project files
+*.idea
+# For macOs users
+.DS_Store

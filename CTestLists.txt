@@ -1,0 +1,27 @@
+#
+#   yojimbo CTest script
+#
+#   Copyright Olivier Le Doeuff 2019
+#
+
+MACRO(YOJIMBO_ADD_TEST TEST_NAME)
+
+    SET(TEST_FULL_NAME ${YOJIMBO_TESTS_PREFIX}_${TEST_NAME})
+
+    MESSAGE(STATUS "Add CTest: ${TEST_FULL_NAME}")
+
+    # Create the executable
+    ADD_EXECUTABLE       (${TEST_FULL_NAME} ${TEST_NAME}.cpp)
+    TARGET_LINK_LIBRARIES(${TEST_FULL_NAME} ${YOJIMBO_TARGET})
+    SET_TARGET_PROPERTIES(${TEST_FULL_NAME} PROPERTIES FOLDER ${YOJIMBO_FOLDER_PREFIX}/Tests)
+
+    # Register the test
+    ADD_TEST(NAME ${TEST_FULL_NAME} COMMAND ${TEST_FULL_NAME})
+ENDMACRO()
+
+# Because tests are in the netcode.c file, the target needs to enable the tests at build time to correctly define symbols
+TARGET_COMPILE_DEFINITIONS(${YOJIMBO_TARGET} PRIVATE "-DYOJIMBO_ENABLE_TESTS")
+
+ENABLE_TESTING()
+
+YOJIMBO_ADD_TEST(test)
